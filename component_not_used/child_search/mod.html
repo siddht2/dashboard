@@ -1,0 +1,38 @@
+<html>
+
+<head>
+  <script type="text/javascript">
+  function update()
+    {
+      var numString = document.getElementById('number').value;
+      if (numString == '0')
+      {
+        document.getElementById('container').innerHTML = 'Zero';
+        return;
+      }
+      if (numString == 0)
+      {
+        document.getElementById('container').innerHTML = ' enter numbers';
+        return;
+      }
+
+      var output = _get_data(numString);
+      document.getElementById('container').innerHTML = output;
+    }
+function _get_data(max)
+{
+	alert(max);
+}
+
+     </script>
+
+</head>
+
+<body>
+
+  <input type="text" id="number" size="70" onkeyup="update();"
+  <br/>
+  <div id="container"> Child data </div>
+</body>
+
+</html>
