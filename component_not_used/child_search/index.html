@@ -1,0 +1,76 @@
+<html>
+<head>
+<script>
+var d_json;
+var i=0;
+var st;
+function loadJSON(file, callback) {
+
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', file, false); // Replace 'my_data' with the path to your file
+    xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == "200") {
+            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+            callback(xobj.responseText);
+          }
+    };
+    xobj.send(null);
+ }
+
+
+function load()
+{
+   loadJSON("json_data/1.json", function(response)
+   {
+  		  //alert(response);
+         d_json = JSON.parse(response); //eval('(' +response+')')
+      var stt;
+
+
+          });
+}
+
+function gn(max)
+{
+	if(max<d_json.length)
+	{
+	document.write("id is :"+d_json[max].id+"<br>");
+	document.write("child name is :"+d_json[max].chld_nm+"<br>");
+  document.write("father name is :"+d_json[max].par_nm+"<br>");
+  var stt;
+  var regex;
+  stt=d_json[max].dob.split('T');
+    document.write("Date of birth  is :"+stt[0]+"<br>");
+      document.write("Time of birth  is :"+stt[1]+"<br>");
+      document.write("gender is :"+d_json[max].gend+"<br>");
+      document.write("Location data :"+"<br>");
+      stt=d_json[max].loc;
+      stt=stt.split(',');
+      regex = new RegExp("[", 'g');
+      stt[0] = stt[0].replace(regex, '');
+        document.write("Latitude is :"+stt[0]+"<br>");
+        regex = new RegExp("]", 'g');
+         stt[1] = stt[1].replace(regex, '');
+        document.write("Latitude is :"+stt[1]+"<br>");
+        document.write("Data created on :"+"<br>");
+        stt=d_json[max].created_date.split('T');
+        document.write("Date is :"+stt[0]+"<br>");
+  document.write("Time is :"+stt[1]+"<br>");
+}
+else
+{
+	alert("Does not exist");
+}}
+
+load();
+function fx()
+{
+	var n = 0;
+    n = prompt("Enter the number you want to query details:");
+    gn(n);
+}
+fx();
+</script>
+        </head>
+        </html>
